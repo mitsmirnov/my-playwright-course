@@ -154,7 +154,7 @@ test.describe('SmartBank - User Management Workflows @smoke @regression', () => 
 
     // FINAL ASSERTION: Prove session termination by confirming that we are back to Logon screen.
     // We use a text search here to verify that the "Sign in" button is visible to the logged-out user.
-    await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Fake button' })).toBeVisible();
 
     // Pause for 3 seconds to let the SmartBank application firewall cool down 
     // before the next parallel or iterative loop attempts another login. 
