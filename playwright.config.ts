@@ -42,8 +42,11 @@ export default defineConfig({
   /* Run tests in files in parallel across available local CPU cores */
   fullyParallel: true,
 
-  /* Fail the build if a developer accidentally leaves 'test.only' in the code */
-  forbidOnly: false, // 💡 Note: Will be automated using process.env.CI in the CI/CD chapter
+  /**
+   * forbidOnly: Fails the build if 'test.only' is accidentally left in code.
+   * On CI, this ensures developers don't accidentally skip the entire suite.
+   */
+  forbidOnly: !!process.env.CI,
 
   /* ========================================================================== */
   /* 2. TIMING, TIMEOUTS, AND RETRIES (CORE CHAPTER 13.3)                       */
@@ -57,18 +60,18 @@ export default defineConfig({
   timeout: 30000, // 30 seconds
 
   /**
-    * retries: Isolates structural test flakiness.
-    * Sets the number of times Playwright immediately re-runs a failed test file.
-    * Hardcoded to 1 here so students can observe the "Flaky" status locally.
-    */
-  retries: 1, // 💡 Hardcoded for local mastery: Replaces "process.env.CI ? 2 : 0" for this chapter
+   * retries: Aggressive retry tracking.
+   * If on CI, retry 2 times to filter out cloud network drops.
+   * If running locally, retry only 1 time for rapid debugging.
+   */
+  retries: process.env.CI ? 2 : 1,
 
   /**
-   * workers: Sets the number of concurrent execution threads.
-   * Passing 'undefined' tells Playwright to automatically optimize speed by 
-   * leveraging all available local CPU cores.
+   * workers: Concurrency and memory bottleneck management.
+   * If on CI, force a single worker (1) to prevent Out-Of-Memory server crashes.
+   * If running locally, use 'undefined' to exploit all computer CPU cores.
    */
-  workers: undefined, // 💡 Hardcoded for local mastery: Replaces "process.env.CI ? 1 : undefined"
+  workers: process.env.CI ? 1 : undefined,
 
   /* ========================================================================== */
   /* 3. ASSERTION LEVEL TIMEOUTS                                                */
