@@ -11,7 +11,7 @@ import { UserFormPage } from '../../pages/UserFormPage';
 test.describe('SmartBank - User Management Workflows @smoke @regression', () => {
   // Every test inside this block now automatically inherits both tags!
 
-  test.describe.configure({ mode: 'serial' });
+  // test.describe.configure({ mode: 'serial' });
 
   // Shared Login Data
   const branchName = 'Lancaster';

@@ -10,7 +10,7 @@ import { CustomerFormPage } from '../../pages/CustomerFormPage';
 // Create a logical test suite block to group all LoanApp customer management test scenarios together
 test.describe('SmartBank - Customer Management Workflows @smoke @regression', () => {
 
-    test.describe.configure({ mode: 'serial' });
+    // test.describe.configure({ mode: 'serial' });
 
     // Shared Login Data
     const branchName = 'Lancaster';
